@@ -14,6 +14,9 @@ This project provides an interactive web application for market trend forecastin
 
 ---
 
+## Project Introduction Video：
+https://www.youtube.com/watch?v=tO_OpAjtfkQ
+
 ## How to Use
 
 ### Step 1: Download the Dataset
@@ -31,5 +34,13 @@ This project provides an interactive web application for market trend forecastin
 - On the application's main page, upload the Electronic_sales_Sep2023-Sep2024.csv file.
 - Explore the interactive analysis results, including data overview, customer trends, time series analysis, XAI, and more.
 
+## Example Output
+The interactive app will display:
 
-https://www.youtube.com/watch?v=tO_OpAjtfkQ
+**Data Overview:** Summarized statistics, filtered data, and visualized distributions.
+**Customer Analysis:** Customer behavior trends, feature correlation heatmaps, and loyalty analysis.
+**Time Series Analysis:** Seasonal decomposition, rolling averages, and future sales forecasts.
+**Product Analysis:** Sales performance by product type.
+**Explainable AI (XAI) Insights:** SHAP and LIME-based feature importance analysis.
+**3D Visualization:** Product sales trends in a 3D surface plot.
+
