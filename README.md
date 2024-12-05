@@ -38,9 +38,14 @@ https://www.youtube.com/watch?v=tO_OpAjtfkQ
 The interactive app will display:
 
 **Data Overview:** Summarized statistics, filtered data, and visualized distributions.
+
 **Customer Analysis:** Customer behavior trends, feature correlation heatmaps, and loyalty analysis.
+
 **Time Series Analysis:** Seasonal decomposition, rolling averages, and future sales forecasts.
+
 **Product Analysis:** Sales performance by product type.
+
 **Explainable AI (XAI) Insights:** SHAP and LIME-based feature importance analysis.
+
 **3D Visualization:** Product sales trends in a 3D surface plot.
 
