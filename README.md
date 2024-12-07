@@ -4,6 +4,8 @@
 
 This project provides an interactive web application for market trend forecasting and customer behavior analysis using electronic sales data.
 
+My submission can be publicly shared (via LinkedIn and/or the Spill the GPTea newsletter) and I would like my name included from the shared post.
+
 ## Features
 - Data Cleaning
 - Customer Analysis
