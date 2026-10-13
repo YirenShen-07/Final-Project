@@ -1,0 +1,24 @@
+{
+  "raw_rows": 20000,
+  "clean_rows": 20000,
+  "customers": 9466,
+  "repeat_completed_customer_share": 0.32748785125713076,
+  "revenue_definitions": {
+    "Recorded order value": 63602668.370000005,
+    "Completed merchandise revenue": 42629615.56999999,
+    "Cancelled order value": 20973052.8,
+    "Completed orders": 13432,
+    "Cancelled orders": 6568
+  },
+  "date_min": "2023-09-24",
+  "date_max": "2024-09-23",
+  "holdout_start": "2024-08-25",
+  "holdout_end": "2024-09-23",
+  "training_days": 336,
+  "test_days": 30,
+  "source_sha256": "672d6187312449b13867c75f0d926d8c023bb436bba34554ad6d401cb8029160",
+  "surrogate_fidelity": 0.9836325237592397,
+  "SHAP_target": "squared distance to fixed cluster center 0, standardized features",
+  "SHAP_sample_rows": 24,
+  "SHAP_background_rows": 40
+}

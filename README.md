@@ -1,38 +1,62 @@
 # Electronics Sales & Customer Analytics Dashboard
 
-An interactive Streamlit prototype for exploring electronics sales, customer purchasing behavior, product performance, and 30-day sales forecasts.
+An interactive Streamlit dashboard for exploring electronics sales, customer purchasing behavior, product performance, and 30-day sales forecasts.
 
 ## Business questions
-- Which products contribute the most order value?
-- How do customer spending and repeat purchasing vary?
-- Which customers are in the top spending decile?
-- How do daily sales trends change over time?
+Which products generate completed-order revenue? Who are the repeat and high-spend customers? How does a sales forecast perform against simple alternatives?
 
-## Implementation
-Python, Pandas, Streamlit, Plotly, Matplotlib, Seaborn, Prophet, scikit-learn, SHAP, and LIME.
-The notebook includes missing-value handling, date conversion, category standardization, customer aggregation, interactive filters, KMeans segmentation, and a 3D sales visualization. Saved data output contains 20,000 transaction rows; the app also removes duplicate rows.
+## Preview
+![Overview](assets/overview.png)
+![Customer analysis](assets/customers.png)
+![Forecast evaluation](assets/forecast.png)
+[Original introduction video](https://www.youtube.com/watch?v=tO_OpAjtfkQ)
 
-## Explore
-- [Project notebook](sales_customer_analytics.ipynb)
-- [Example dataset](Electronic_sales_Sep2023-Sep2024.csv)
-- [Introduction video](https://www.youtube.com/watch?v=tO_OpAjtfkQ)
+## Run locally
+```bash
+git clone https://github.com/YirenShen-07/SalesAnalyticsDashboard.git
+cd SalesAnalyticsDashboard
+python -m venv .venv
+# macOS / Linux:
+source .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+streamlit run app.py
+```
+Open the local URL printed by Streamlit. The bundled CSV loads automatically; uploading another CSV is optional. Python 3.12 was used for verification. No Drive, ngrok account, or token is required.
 
-## Run the prototype
-1. Open the notebook in Google Colab.
-2. Adjust the initial dataset path to your own copy of the included CSV, or skip the exploratory Drive-dependent cells.
-3. Run the installation cells and the cell that writes `app.py`.
-4. Configure your own ngrok token securely if using a tunnel.
-5. Run the Streamlit launch cell and open its temporary URL.
-6. Upload the included CSV in the application.
+## Definitions and implementation
+- **Recorded order value:** Total Price on all valid recorded orders.
+- **Completed merchandise revenue:** Total Price only where Order Status is Completed. This is a status-based revenue proxy; settlement, refunds and add-on revenue are not modeled.
+- **Cancelled order value:** tracked separately and excluded from revenue, customer spend, product comparisons and forecasting.
+- **Repeat purchaser:** more than one completed transaction. **High-spend threshold:** completed spend above the 90th percentile, not predicted lifetime value.
+- Latest loyalty status is chosen after chronological sorting. Product order counts are not unique SKU counts.
 
-A standalone app and dependency file are not yet included. The tunnel URL is temporary.
+The bundled data contains 20,000 rows. Completed merchandise revenue is $42,629,615.57; cancelled order value is $20,973,052.80.
 
-## Interpretation and limitations
-- Current aggregates include cancelled orders: they represent recorded order value, not verified realized revenue.
-- The 30-day Prophet forecast has not been evaluated against a held-out time period or baseline.
-- SHAP currently explains numeric KMeans cluster IDs, whose numbering is arbitrary; this is an experimental visualization, not a validated explanation of customer value.
-- LIME explains a decision-tree surrogate trained to reproduce cluster labels, not KMeans directly.
-- No measured sales uplift, retention improvement, or production deployment is claimed.
+Python / Pandas handle cleaning and aggregation; Streamlit and Plotly provide six analysis pages; Prophet models daily completed revenue; scikit-learn provides segmentation and a surrogate tree.
+
+## Forecast evaluation
+A fixed final 30-day chronological holdout (2024-08-25 through 2024-09-23) is excluded from fitting. Two baselines and Prophet are evaluated on the same dates; settings are fixed in advance.
+
+| Model | MAE | RMSE |
+| --- | --- | --- |
+| Trailing 7-day mean | 25175.6113 | 31198.7355 |
+| Weekly seasonal naive | 29892.2107 | 38662.4040 |
+| Prophet | 24376.6728 | 30768.0119 |
+
+MAE and RMSE are in the dataset's monetary units. On this holdout, Prophet modestly outperforms the baselines; this does not establish general superiority. Annual seasonality is disabled given approximately one year of data. Missing calendar days are treated as zero orders, assuming complete reporting coverage. The displayed 80% Prophet intervals are model-based and have not been coverage-calibrated.
+
+## Explainability
+KMeans IDs are arbitrary labels and are never used as a numeric SHAP target. SHAP explains **squared distance to one fixed cluster center** in standardized feature space; positive contributions increase distance, negative contributions reduce it. Computation is bounded to 24 customers and 40 background rows.
+
+LIME explains a **decision-tree surrogate** trained to imitate the current KMeans labels. Held-out agreement with those labels is 98.4%; this measures fidelity to the descriptive segmentation, not predictive business effectiveness. Interventional backgrounds and continuous LIME perturbations can break dependencies or generate unusual customer profiles.
+
+## Reproduce and verify
+```bash
+python analyze.py
+python -m unittest test_analytics.py
+```
+The [notebook](sales_customer_analytics.ipynb) runs the same analysis module. [Reports](reports/) include metrics, predictions, plots and split metadata. [DATA.md](DATA.md) lists sources and definitions. [SECURITY.md](SECURITY.md) tracks the old tunnel-token remediation separately.
 
 ## Project context
-Developed by Yiren Shen for Duke's AIPI 590 Explainable AI course. The repository is presented as an analytics portfolio prototype.
+Original Duke AIPI 590 project by Yiren Shen. The 2026 portfolio maintenance pass adds reproducibility, evaluation and corrections with AI assistance. No measured sales uplift or production use is claimed.

@@ -1,0 +1,7 @@
+Feature condition,Weight
+Age > 0.87,0.3599443987195104
+-1.44 < Purchase_Frequency <= 0.68,0.30154914696099994
+-0.54 < Avg_Rating <= -0.09,0.10070018495067304
+-0.76 < Total_Spend <= -0.28,0.050457431711304124
+Transaction_Count <= -0.61,0.030416674464153103
+Customer_Lifetime_Days <= -0.54,0.0056768579772118865
