@@ -1,53 +1,38 @@
-# Final-Project
+# Electronics Sales & Customer Analytics Dashboard
 
-# Market Trend Forecasting & Customer Behavior Analysis
+An interactive Streamlit prototype for exploring electronics sales, customer purchasing behavior, product performance, and 30-day sales forecasts.
 
-This project provides an interactive web application for market trend forecasting and customer behavior analysis using electronic sales data.
+## Business questions
+- Which products contribute the most order value?
+- How do customer spending and repeat purchasing vary?
+- Which customers are in the top spending decile?
+- How do daily sales trends change over time?
 
-My submission can be publicly shared (via LinkedIn and/or the Spill the GPTea newsletter) and I would like my name included from the shared post.
+## Implementation
+Python, Pandas, Streamlit, Plotly, Matplotlib, Seaborn, Prophet, scikit-learn, SHAP, and LIME.
+The notebook includes missing-value handling, date conversion, category standardization, customer aggregation, interactive filters, KMeans segmentation, and a 3D sales visualization. Saved data output contains 20,000 transaction rows; the app also removes duplicate rows.
 
-## Features
-- Data Cleaning
-- Customer Analysis
-- Time Series Analysis
-- Product Analysis
-- Explainable AI (XAI) Insights
-- 3D Visualization
+## Explore
+- [Project notebook](FinalProject.ipynb)
+- [Example dataset](Electronic_sales_Sep2023-Sep2024.csv)
+- [Introduction video](https://www.youtube.com/watch?v=tO_OpAjtfkQ)
 
----
+## Run the prototype
+1. Open the notebook in Google Colab.
+2. Adjust the initial dataset path to your own copy of the included CSV, or skip the exploratory Drive-dependent cells.
+3. Run the installation cells and the cell that writes `app.py`.
+4. Configure your own ngrok token securely if using a tunnel.
+5. Run the Streamlit launch cell and open its temporary URL.
+6. Upload the included CSV in the application.
 
-## Project Introduction Video：
-https://www.youtube.com/watch?v=tO_OpAjtfkQ
+A standalone app and dependency file are not yet included. The tunnel URL is temporary.
 
-## How to Use
+## Interpretation and limitations
+- Current aggregates include cancelled orders: they represent recorded order value, not verified realized revenue.
+- The 30-day Prophet forecast has not been evaluated against a held-out time period or baseline.
+- SHAP currently explains numeric KMeans cluster IDs, whose numbering is arbitrary; this is an experimental visualization, not a validated explanation of customer value.
+- LIME explains a decision-tree surrogate trained to reproduce cluster labels, not KMeans directly.
+- No measured sales uplift, retention improvement, or production deployment is claimed.
 
-### Step 1: Download the Dataset
-1. Download the dataset: Electronic_sales_Sep2023-Sep2024.csv 
-   - This dataset contains sales transaction records for an electronics company from September 2023 to September 2024.
-
-### Step 2: Run the Code in Google Colab
-
-### Step 3: Access the Public URL
-- After running the code, scroll to the bottom of the Colab output.
-- Find the Public URL: NgrokTunnel: link.
-- Click the link to open the application in your browser.
-
-### Step 4: Upload the Dataset
-- On the application's main page, upload the Electronic_sales_Sep2023-Sep2024.csv file.
-- Explore the interactive analysis results, including data overview, customer trends, time series analysis, XAI, and more.
-
-## Example Output
-The interactive app will display:
-
-**Data Overview:** Summarized statistics, filtered data, and visualized distributions.
-
-**Customer Analysis:** Customer behavior trends, feature correlation heatmaps, and loyalty analysis.
-
-**Time Series Analysis:** Seasonal decomposition, rolling averages, and future sales forecasts.
-
-**Product Analysis:** Sales performance by product type.
-
-**Explainable AI (XAI) Insights:** SHAP and LIME-based feature importance analysis.
-
-**3D Visualization:** Product sales trends in a 3D surface plot.
-
+## Project context
+Developed by Yiren Shen for Duke's AIPI 590 Explainable AI course. The repository is presented as an analytics portfolio prototype.
