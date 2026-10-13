@@ -13,7 +13,7 @@ Python, Pandas, Streamlit, Plotly, Matplotlib, Seaborn, Prophet, scikit-learn, S
 The notebook includes missing-value handling, date conversion, category standardization, customer aggregation, interactive filters, KMeans segmentation, and a 3D sales visualization. Saved data output contains 20,000 transaction rows; the app also removes duplicate rows.
 
 ## Explore
-- [Project notebook](FinalProject.ipynb)
+- [Project notebook](sales_customer_analytics.ipynb)
 - [Example dataset](Electronic_sales_Sep2023-Sep2024.csv)
 - [Introduction video](https://www.youtube.com/watch?v=tO_OpAjtfkQ)
 
